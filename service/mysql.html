@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="top">
+			<h3>查询用户</h3>
+			<input type="text" id="user_id" placeholder="请输入用户id"/><br />
+			<input type="text" id="user_name" placeholder="请输入用户名"/><br>
+			<button id="btn">查询</button>
+			<table border="" cellspacing="" cellpadding="">
+				<tr>
+					<th>编号</th>
+					<th>姓名</th>
+					<th>密码</th>
+					<th>电话</th>
+				</tr>
+				<tr id="show" v-for="item,index in list">
+					<td>{{item.id}}</td>
+					<td>{{item.name}}</td>
+					<td>{{item.pass}}</td>
+					<td>{{item.phone}}</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+	<script src="../js/jquery-1.12.4.min.js"></script>
+	<script src="../js/vue.js"></script>
+	<script>
+//		//原生ajax
+//		var xhr=new XMLHttpRequest();
+//		xhr.onreadystatechange = function(){
+//			if(xhr.readyState ==4 && xhr.status){
+//				console.log(xhr.response);
+//			}
+//		}
+//		xhr.open("GET","http://localhost:3000/select?name=andy");
+//		xhr.send();
+		var vm=new Vue({
+					el:"#top",
+					data:{
+						list : []
+					}
+				})
+		$("#btn").on("click",function(){
+			vm.list =[];
+			user_id =$("#user_id").val();
+			user_name = $("#user_name").val();
+			$.ajax({
+				type:"get",
+				url:`http://localhost:3000/select?name=${user_name}`,
+				success:function(data){
+					console.log(data);
+					for(var i=0;i<data.length;i++){
+						vm.list.push(data[i]);
+					}
+				}
+			});
+		})
+		
+		
+		
+	</script>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<!--<link rel="stylesheet" href="../css/head.css" />-->
+		<link rel="stylesheet" href="../css/home.css" />
+		<script>
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 1242*100 + 'px';
+		</script>
+	</head>
+	<body>
+		<div class="head">
+			<div id="top" class="mui-bar mui-bar-nav" v-if="bar_flag">
+				<div id="city" @click="city()"><span>{{pos}}</span><img id="under" src="../img/under.png" alt="" /></div>
+				<div @click="choose_bar()">
+					<div>
+						<img src="../icon/search.png" alt="" />
+					    <span>商品搜索</span>
+					</div>
+				</div>
+				<div id="add" @click="add()"><img src="../img/brn-jia@3x.png" alt="" /></div> 
+			</div>
+			<div class="mui-bar mui-bar-nav" id="one" v-else="bar_flag">
+				<img src="../icon/search.png" alt="" />
+				<input id="inp_txt" @click="inp_txt()" type="text" placeholder="有位少年营养套餐"/>
+				<span @click="cancle()">取消</span>
+			</div>
+			
+			
+			<div class="top_alert" v-if="is_show">
+				<div class="trigon"></div>
+				<div class="alert" v-for="item,index in list" @click="sao_yi_sao(index)" :class="{_alert:index==0}">
+					<span>{{item.name}}</span>
+					<p v-if="item.flag"></p>
+				</div>
+			</div>
+		</div>
+		<div id="show" class="show"></div>
+        <div id="pullrefresh" class="mui-content mui-scroll-wrapper" @click="content()" v-if="disable">
+			  <div class="mui-scroll">
+			    <!--数据列表-->
+			       <div class="goods_content" v-for="item,index in shop">
+					   <div class="goods">
+					   	  <img src="../img/bld.jpg" alt="" />
+					   	  <div class="goods_default" :class="{mar:item.flag}">
+					   	  	  <div class="goods_title"><span class="goods_name">{{item.goods_name}}</span><span class="goods_pos">{{item.goods_pos}}</span></div>
+					   	  	  <div class="doc">{{item.doc}}</div>
+					   	  	  <div class="peizhi">{{item.peizhi}}</div>
+					   	  	  <div class="pay">
+					   	  	  	<span class="fuhao">￥</span><span class="price">{{item.price}}</span><span class="rack"  v-if="item.type==1">门市价:</span><span class="youhui">{{item.youhui}}</span><span class="rack_price">{{item.rack_price}}</span>
+					   	  	  	<span class="out_shop">{{item.out_shop}}</span>
+					   	  	  </div>
+					   	  </div>
+					   </div>
+				   </div>
+			  </div>
+		</div>
+		<!--弹窗城市列表-->
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/vue.js"></script>
+	<script src="../js/jquery-1.12.4.min.js"></script>
+	<script src="../js/require.js" data-main = "../js/home.js"></script>
+</html>

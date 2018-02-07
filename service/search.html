@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/bootstrap.css" />
+		<style type="text/css">
+			#top{
+				width: 100%;
+				height: 30px;
+				line-height:30px;
+				font-size:16px;
+				color:white;
+				background: #20B2AA;
+				text-align: center;
+			}
+			#zm_pre{
+				height: 30px;
+				width: 100%;
+				background: white;
+				line-height: 30px;
+				font-size: 12px;
+			}
+			#zm_pre button{
+				height: 20px;
+				line-height:10px;
+			}
+			#content{
+				width: 100%;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="head">
+		<div id="top">唐诗3000首</div>
+		<div id="zm_pre">
+			<span>著名诗人：</span>
+			<button>李白</button>
+			<button>杜甫</button>
+			<button>苏轼</button>
+		</div>
+		<div>
+			<span>唐宋八大家：</span>
+			<span>柳宗元</span>
+			<span>苏轼</span>
+			<span>苏洵</span>
+			<span>苏辙</span>
+			<span>王安石</span>
+			<span>曾巩</span>
+			<span>欧阳修</span>
+			<span>韩愈</span>
+		</div>
+		<br />
+		<div id="content">
+			<p>{{val}}</p>
+			<span>{{slect}}</span>
+			<p v-for="item,index in showData">{{item.content}}</p>
+		</div>
+		<br /><br /><br />
+		<div>
+			<!--<select name="" v-model="slect">
+				<template v-for="item,index in list">
+					<option  v-bind:value="item.name" >{{item.name}}</option>
+				</template>
+			</select>-->
+			<input type="text" placeholder="请输入作者名字" v-model="slect"/>
+		</div>
+		<!--<div>{{slect}}</div>-->
+		<input type="text" v-model="val"/><button @click="get_content()">查找作者以及作品</button>
+		<hr />
+		<div>
+			<input type="text" v-model="auth"/><button @click="get_all()">查找作者</button>
+			<div v-for="item2,index in shop">{{item2.name}}  {{item2.title}}</div>
+		</div>
+		<div>
+	</body>
+	<script src="../js/vue.js"></script>
+	<script src="../js/axios.min.js"></script>
+	<script src="../js/jquery-1.12.4.min.js"></script>
+	<script>
+		//定义ajax；
+		Vue.prototype.$http = axios;
+		var vm=new Vue({
+			el:"#head",
+			data:{
+				slect : "李白",
+				list :[],
+				showData:[],
+				shop:[],
+				val:"静夜思",
+				num:0,
+				auth:""
+			},
+			methods:{
+				get_author:function(t){
+					vm.$http.get('http://localhost:3000/getAuthor')
+		            .then(function(response){
+		            	vm.list = response.data;
+		            })
+		            .catch(function(error){
+		            	console.log(error)
+		            })
+				},
+				get_content:function(){
+					vm.$http.get('http://localhost:3000/tsall',{
+						params : {
+							name : vm.slect,
+							title : vm.val
+						}
+					})
+		            .then(function(response){
+		            	vm.showData = response.data;
+		            	console.log("vm.showData="+JSON.stringify(vm.showData))
+		            })
+		            .catch(function(error){
+		            	console.log(error)
+		            })
+				},
+				get_all :function(){
+					vm.$http.get('http://localhost:3000/shopall',{
+						params : {
+							name : vm.auth
+						}
+					})
+		            .then(function(response){
+		            	vm.shop = response.data;
+		            	console.log("vm.shop="+JSON.stringify(vm.shop))
+		            })
+		            .catch(function(error){
+		            	console.log(error)
+		            })
+				}
+			}
+		})
+		vm.get_author();
+		vm.get_content();
+	</script>
+</html>

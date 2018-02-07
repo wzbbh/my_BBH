@@ -1,0 +1,122 @@
+body {
+	background: url(../img/1.jpg);
+	width: 100%;
+	height: 100%;
+}
+
+.mui-content {
+	padding: 0rem 1.48rem;
+	margin-top:2rem !important;
+	background:url(../img/ts_logo.jpg) no-repeat;
+	background-size: 100% 100%;
+}
+
+.photo {
+	height: 1.32rem;
+	margin-top: 3rem !important;
+}
+
+.photo img {
+	width: 1.96rem;
+	height: 1.96rem;
+	vertical-align: middle;
+}
+
+.photo span {
+	vertical-align: middle;
+	font-size: 1.96rem;
+}
+
+
+/*输入框*/
+
+.text{
+	margin-top: 2rem;
+	border: none !important;
+	border-radius: 0rem !important;
+	border-bottom: 1px solid #F1F1F1 !important;
+	
+}
+
+.pass ,.tel{
+	border: none !important;
+	border-radius: 0rem !important;
+	border-bottom: 1px solid #F1F1F1 !important;
+	margin-top: -1rem !important;
+}
+
+input {
+/*	padding: 0rem !important;*/
+	font-size: 0.48rem;
+	padding-left:0.48rem;
+	background: rgba(255,255,255,0.6) !important;
+}
+
+
+/*登录*/
+
+.login {
+	width: 100%;
+	height: 1.32rem;
+	line-height: 1.32rem;
+	background: linear-gradient(red, orangered);
+	text-align: center;
+	margin-top: 1rem;
+	font-size: 0.56rem;
+	color: white;
+	border-radius: 0.2rem;
+}
+
+.forgetAndnew {
+	height: 1.32rem;
+	line-height: 1.32rem;
+	font-size: 0.44rem;
+}
+
+.forgetAndnew span:nth-of-type(1) {
+	float: left;
+}
+
+.forgetAndnew span:nth-of-type(2) {
+	float: right;
+}
+
+
+/*第三方登录*/
+
+.other_login {
+	height: 1.32rem;
+	line-height: 1.32rem;
+	font-size: 0.56rem;
+	text-align: center;
+	margin-top: 2rem;
+}
+
+.all {
+	display: flex;
+	border-top: 0.5px dashed orangered;
+	margin-top: 0.5rem;
+}
+
+.all div {
+	width: 50%;
+	text-align: center;
+	padding-top: 0.8rem;
+}
+
+.all img {
+	width: 0.66rem;
+	height: 0.66rem;
+}
+
+.doc {
+	width: 60%;
+	height: 1.32rem;
+	line-height: 1.32rem;
+	text-align: center;
+	position: fixed;
+	bottom: 0rem;
+	left: 20%;
+	font-size: 0.4rem;
+	color: lightgrey;
+}

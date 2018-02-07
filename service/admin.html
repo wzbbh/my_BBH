@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				margin: 0px;
+				padding: 0px;
+			}
+			#top{
+				height: 40px;
+				background:lightseagreen;
+				text-align: center;
+				line-height: 40px;
+				color: white;
+				font-size: 24px;
+				font-family: "微软雅黑";
+			}
+			#content_name{
+				height: 30px;
+				line-height:30px;
+				text-align: center;
+				color: lightseagreen;
+				font-size: 16px;
+				font-family: "微软雅黑";
+			}
+			table{
+				width:80%;
+				text-align: center;
+			}
+			td{
+				width: 15%;
+				font-size: 12px !important;
+			}
+			table{border-collapse:collapse;border-spacing:0;border-left:1px solid #888;border-top:1px solid #888;background:#efefef;}
+			th,td{border-right:1px solid #888;border-bottom:1px solid #888;padding:2px 0px;}
+			th{font-weight:bold;background:#ccc;}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div id="top">BBH--的后台管理系统</div>
+		</header>
+		<div id="content">
+			<div id="content_name">bbh-所有用户数据</div>
+			<table border="1px solid red" cellspacing="0px" cellpadding="0px">
+				<tr>
+					<th>编号</th>
+					<th>姓名</th>
+					<th>密码</th>
+					<th>电话</th>
+				</tr>
+				<tr v-for="item,index in list">
+					<td>{{item.id}}</td>
+					<td>{{item.name}}</td>
+					<td><input type="text" class="text" v-model="item.pass"/></td>
+					<td><input type="tel"  class="phone" v-model="item.phone"/></td>
+					<td @click="set(item.id,index)">修改</td>
+					<td @click="del(item.id)">删除</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+	<script src="../js/jquery-1.12.4.min.js"></script>
+	<script src="../js/vue.js"></script>
+	<script>
+		var _url="http://localhost:3000/";
+		var vm=new Vue({
+			el:"#content",
+			data:{
+				list :[]
+			},
+			methods:{
+				set:function(_id,index){
+					var _pass=$(".text").eq(index).val();
+					var _phone=$(".phone").eq(index).val();
+					$.ajax({
+						type : "get",
+						url : `http://localhost:3000/update?pass=${_pass}&phone=${_phone}&id=${_id}`,
+						success:function(data){
+							console.log(JSON.stringify(data))	
+						}
+					})
+				},
+				del:function(_id){
+					$.ajax({
+						type : "get",
+						url : `http://localhost:3000/delete?id=${_id}`,
+						success:function(data){
+							vm.list = [];
+								init();
+						}
+					})
+				}
+			}
+		})
+		
+		
+		
+		//页面初始加载所有数据
+		function init(){
+			$.ajax({
+				type : "get",
+				url : _url+"all",
+				success:function(data){
+					if(data.length>0){
+						for(var i=0;i<data.length;i++){
+							vm.list.push(data[i]);
+						}
+					}
+				}
+			})		
+		}
+		init();
+		
+		
+		
+		function http(_url,fun){
+			$.ajax({
+			type : "get",
+			url : _url,
+			success:function(data){
+					fun(data);
+				}
+			})
+		}
+
+		
+
+	</script>
+</html>

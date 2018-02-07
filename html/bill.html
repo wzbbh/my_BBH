@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script>
+			document.documentElement.style.fontSize = document.documentElement.clientWidth / 1242*100 + 'px';
+		</script>
+		<link rel="stylesheet" href="../css/head.css" />
+		<link rel="stylesheet" href="../css/bill.css" />
+	</head>
+	<body>
+		<div id="top" class="mui-bar mui-bar-nav">
+		    <div class="mui-action-back mui-icon mui-icon-back"></div>
+		    <h1 class="mui-title">添加发票抬头</h1>
+		</div>
+		<div class="mui-content">
+		    <div class="bill_type">
+		    	<span>抬头类型</span>
+				<div class="mui-input-row mui-radio mui-left" id="company">
+					<label>单位</label>
+					<input name="radio1" type="radio" checked="">
+				</div>
+				<div class="mui-input-row mui-radio mui-left" id="preson">
+					<label>个人</label>
+					<input name="radio1" type="radio">
+				</div>
+		    </div>
+		    <div class="bill_name" id="frist">
+		    	<div class="bill_TypeName">
+		    		<span>抬头名称</span><input type="text" placeholder="请输入准确的抬头名称 (必填)"/>
+		    	</div>
+		    	<div class="bill_TypeName" id="suihao">
+		    		<span>税号</span><input type="text" placeholder="请输入税号或社会信用代码 "/>
+		    	</div>
+		    </div>
+		    <div id="next_title">输入完整抬头信息,已开具增值税专用发票？</div>
+		    <div class="bill_name" id="one">
+		    	<div class="bill_TypeName">
+		    		<span>电话号码</span><input type="text" placeholder="请输入单位电话号码 "/>
+		    	</div>
+		    	<div class="bill_TypeName">
+		    		<span>单位地址</span><input type="text" placeholder="单位注册地址信息 "/>
+		    	</div>
+		    	<div class="bill_TypeName">
+		    		<span>开户银行</span><input type="text" placeholder="单位的开户行名称"/>
+		    	</div>
+		    	<div class="bill_TypeName">
+		    		<span>银行账户</span><input type="text" placeholder="单位的银行账户 "/>
+		    	</div>
+		    </div>
+		    <div class="bill_name" id="tow" style="display: none;">
+		    	<div class="bill_TypeName">
+		    		<span>电话号码</span><input type="text" placeholder="您常用的手机号码 "/>
+		    	</div>
+		    	<div class="bill_TypeName">
+		    		<span>电子邮箱</span><input type="text" placeholder="提供邮箱地址以接收电子发票 "/>
+		    	</div>
+		    	<div class="bill_TypeName">
+		    		<span>邮寄地址</span><input type="text" placeholder="输入地址以收取纸质发票"/>
+		    	</div>
+		    </div>
+		    <div class="save_cont">
+		    	<div class="save">
+		    	保存发票抬头
+		    	</div>
+		    </div>
+		    
+		    <!--alert-->
+		    <div id="alert">
+		    	<div>
+		    		<h4>开票须知</h4>
+		    		<p>国家税务总局规定：7月1日起，开具增值税普通发票，需提供单位抬头与税号，否则无法用于单位报销；开具增值税专用发票，需提供单位完成信息。请咨询单位财务部门获取相关信息。</p>
+		    		<h5 id="know">知道了</h5>
+		    	</div>
+		    </div>
+		</div>
+	</body>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		mui.init();
+		//单位
+		$("#company").on("click",function(){
+			$("#tow").hide();
+			$("#next_title").show();
+			$("#one").show();
+			$("#suihao").show();
+			$("#frist").css("margin-bottom","0rem");
+			$(".bill_TypeName").eq(0).css("border-bottom","0.5px solid lightgray")
+		})
+		//个人
+		$("#preson").on("click",function(){
+			$("#tow").show();
+			$("#next_title").hide();
+			$("#one").hide();
+			$("#suihao").hide();
+			$("#frist").css("margin-bottom","0.48rem");
+			$(".bill_TypeName").eq(0).css("border","none")
+		});
+		
+		//发票说明
+		$("#know").on('tap',function(){
+			$("#alert").hide();
+		})
+		$("#next_title").on('tap',function(){
+			$("#alert").show();
+		});
+		$("#alert").hide();
+	</script>
+</html>

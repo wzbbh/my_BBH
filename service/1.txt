@@ -1,0 +1,28 @@
+创建一张表  E:\mysql-5.7.20-winx64\bin>mysql
+create table users(
+	id    int primary key,
+	name  varchar(20) not null,
+	pass  varchar(20) not null,
+	phone varchar(20) unique
+);
+
+
+insert 插入数据
+insert into users values("1","andy","123456","13676538652");
+insert into users values("2","bobo","123456","13575221514");
+insert into users values("3","caca","123456","18455545562");
+insert into tab1 values(3,"xiaobai");
+
+
+update 更新数据
+update tab1 set name="小白" where id=3;
+
+
+
+
+delete 删除数据*****
+delete from tab1 where id=1;       //删除某行或多行
+
+
+以下操作有巨大风险*****删除整个数据表，表的结构还在
+delete from tab1

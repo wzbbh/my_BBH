@@ -1,0 +1,22 @@
+{
+	"index.html": {
+		"resources": [
+			"html/home.html"
+		],
+		"refer": [
+			"html/my.html",
+			"html/order.html",
+			"html/find.html",
+			"html/nearby.html",
+			"html/home.html"
+		]
+	},
+	"html/home.html": {
+		"resources": [
+			"icon/搜索.png"
+		],
+		"refer": [
+			"html/city.html"
+		]
+	}
+}
